@@ -1,18 +1,11 @@
-﻿import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
-  rootElement);
-
-registerServiceWorker();
-
+  document.getElementById('root')
+);

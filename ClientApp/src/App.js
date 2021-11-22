@@ -1,22 +1,42 @@
-﻿import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { useState, useEffect } from 'react'
+import { Routes, Route } from "react-router-dom"
+import { Home } from "./Pages/Home"
+import { Status } from "./Pages/Status"
 
-import './custom.css'
+const App = () => {
 
-export default class App extends Component {
-  static displayName = App.name;
+  const [user, setUser] = useState({
+    FirstName: "Tim",
+    LastName: "Babbitt",
+    UserId: "4367ff6f-c94a-4bb8-88d1-2fcba2570ee8"
+  })
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
-    );
-  }
+  const [projects, setProjects] = useState([])
+  const [currentTask, setCurrentTask] = useState(null)
+  console.log(currentTask)
+
+  useEffect(() => {
+    const fetchURL = "api/Project/Get/" + '1234'
+    const fetchParams = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(fetchURL, fetchParams)
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        setProjects(data)
+      })
+  }, [])
+
+  return (
+    <div className="App">
+      <Routes>
+        <Route exact path="/" element={<Home projects={projects} user={user} currentTask={currentTask} setCurrentTask={(task) => setCurrentTask(task)} />} />
+        <Route exact path="/status" element={<Status projects={projects} user={user} />} />
+      </Routes>
+    </div>
+  );
 }
+
+export default App;

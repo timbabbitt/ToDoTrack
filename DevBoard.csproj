@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.21" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,8 @@
     <None Remove="$(SpaRoot)**" />
     <None Remove="Controllers\" />
     <None Remove="Objects\" />
+    <None Remove="Microsoft.Data.SqlClient" />
+    <None Remove="System.Data.SqlClient" />
   </ItemGroup>
 
   <ItemGroup>
