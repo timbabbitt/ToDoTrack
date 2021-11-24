@@ -89,7 +89,7 @@ namespace DevBoard.Objects
                                     Notes = data.GetString(4),
                                     Added = data.GetDateTime(5),
                                     AssignedTo = data.GetString(6),
-                                    AssignedOn = data.GetDateTime(7),
+                                    AssignedOn = data.GetValue(7) == DBNull.Value ? (DateTime?)null : data.GetDateTime(7),
                                     Status = data.GetInt32(8),
                                     CompletedOn = data.GetValue(9) == DBNull.Value ? (DateTime?)null : data.GetDateTime(9),
                                     //CompletedBy = data.GetString(10)

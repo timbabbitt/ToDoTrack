@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import { Project } from '../Components/Project';
 import { CurrentTask } from '../Components/CurrentTask';
+import { AddProjectModal } from '../Components/Modals/AddProjectModal';
 
 export const Home = (props) => {
 
   const { projects, user, currentTask } = props
+  const [addProjectModalIsShown, setAddProjectModalIsShown] = useState(false)
 
   const start = (task) => {
+    if (currentTask !== null) stop(currentTask)
+
     const fetchURL = "api/Timer/Start"
     const fetchParams = {
       method: 'POST',
@@ -15,7 +20,7 @@ export const Home = (props) => {
     fetch(fetchURL, fetchParams)
       .then(resp => resp.json())
       .then(data => {
-        // console.log(data)
+        console.log(data)
         props.setCurrentTask(data)
       })
   }
@@ -33,11 +38,12 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1>DevBoard</h1>
       <p>Welcome {user.FirstName}</p>
-      <button>Add a Project</button>
 
-      <CurrentTask task={currentTask} stop={(task) => stop(task)} />
+      {currentTask !== null && <CurrentTask task={currentTask} stop={(task) => stop(task)} />}
+
+      <button onClick={() => setAddProjectModalIsShown(true)}>Add a Project</button>
 
       {projects.map((project, i) => {
 
@@ -47,6 +53,8 @@ export const Home = (props) => {
           </div>
         )
       })}
+
+      <AddProjectModal isOpen={addProjectModalIsShown} onClose={() => setAddProjectModalIsShown(false)} />
     </div>
   )
 }

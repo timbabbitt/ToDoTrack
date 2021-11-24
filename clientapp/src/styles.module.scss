@@ -1,0 +1,130 @@
+$largeFont: 1.6rem;
+$normalFont: 1rem;
+$smallFont: 0.8rem;
+$background-color: rgb(250,250,250);
+$border-color: rgb(200,200,200);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.TitleText {
+  font-size: $largeFont;
+  font-weight: bold;
+  color: rgb(0,0,0);
+}
+
+.SubTitleText {
+  font-size: $normalFont;
+  font-weight: bold;
+  color: rgb(0,0,0);
+}
+
+.BodyText {
+  font-size: $smallFont;
+  font-weight: normal;
+  line-height: 2;
+  color: rgb(0,0,0);
+}
+
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 200, 200, 0.5);
+  z-index: 99999;
+  animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  background-color: $background-color;
+  border: 0px solid black;
+  border-radius: 2px;
+  padding: 18px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.modalHeader {
+  font-size: $largeFont;
+  margin-bottom: 10px;
+}
+
+.modalBody {
+}
+
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.inputLabel {
+  font-size: $normalFont;
+  margin-bottom: 5px; 
+}
+
+.textInput {
+  padding: 5px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+}
+
+
+
+
+// Current Task
+.currentTaskContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid rgb(225,225,225);
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #e1e1e1;
+
+}
+
+.taskNotes {
+  font-size: $smallFont;
+  border: 1px solid rgb(205,205,205);
+  padding: 5px;
+  width: 100%;
+}
+
+.stopButton {
+  border: 1px solid rgb(225,225,225);
+  border-radius: 6px;
+  padding: 5px;
+  background-color: rgb(205,205,205);
+  color: black;
+  font-size: $normalFont;
+  cursor: pointer;
+  width: 32px;
+  &:hover {
+    background-color: rgba(225, 0, 25, 0.3);
+  }
+}
+

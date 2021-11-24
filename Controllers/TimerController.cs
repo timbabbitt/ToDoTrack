@@ -12,6 +12,17 @@ namespace DevBoard.Controllers
     [Route("api/[controller]/[action]")]
     public class TimerController : Controller
     {
+        [HttpGet("{id}")]
+        [ActionName("Active")]
+        public Activity GetActive(string id)
+        {
+            Activity activity = new Activity();
+            activity.GetActive(id);
+
+            return activity;
+        }
+
+
         [HttpPost]
         [ActionName("Start")]
         public Activity StartActivity([FromBody] Objects.Task task)

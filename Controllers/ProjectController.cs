@@ -42,6 +42,34 @@ namespace DevBoard.Controllers
 
             return projects;
         }
+
+        [HttpPost]
+        [ActionName("Add")]
+        public void AddProject([FromBody] Project project)
+        {
+            string projectQuery = @"INSERT INTO [EngDispatch].[dbo].[DevBoard_Projects]
+                (ProjectId, Name, Added, AddedBy, Description, Notes, Status, ProjectGroup)
+                VALUES (@ProjectId, @Name, @Added, @AddedBy, @Description, @Notes, @Status, @ProjectGroup)";
+
+            using (SqlConnection sqlConnection = new SqlConnection("data source=rsql02;initial catalog=EngDispatch;integrated security=SSPI"))
+            {
+                sqlConnection.Open();
+
+                using (SqlCommand sqlCommand = new SqlCommand(projectQuery, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@ProjectId", Guid.NewGuid());
+                    sqlCommand.Parameters.AddWithValue("@Name", project.Name);
+                    sqlCommand.Parameters.AddWithValue("@Added", DateTime.Now);
+                    sqlCommand.Parameters.AddWithValue("@AddedBy", "69876");
+                    sqlCommand.Parameters.AddWithValue("@Description", project.Description);
+                    sqlCommand.Parameters.AddWithValue("@Notes", project.Notes);
+                    sqlCommand.Parameters.AddWithValue("@Status", 1);
+                    sqlCommand.Parameters.AddWithValue("@ProjectGroup", project.Group);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
 
