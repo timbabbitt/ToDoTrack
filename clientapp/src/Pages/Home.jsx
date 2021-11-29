@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Project } from '../Components/Project';
 import { CurrentTask } from '../Components/CurrentTask';
 import { AddProjectModal } from '../Components/Modals/AddProjectModal';
+import styles from '../styles.module.scss'
 
 export const Home = (props) => {
 
@@ -45,15 +46,10 @@ export const Home = (props) => {
 
       <button onClick={() => setAddProjectModalIsShown(true)}>Add a Project</button>
 
-      {projects.map((project, i) => {
-
-        return (
-          <div key={i} style={{ border: '1px solid rgb(225,225,225)', padding: '10px', margin: '10px 0px' }}>
-            <Project project={project} start={(task) => start(task)} />
-          </div>
-        )
-      })}
-
+      <div className={styles.projectsContainer}>
+        {projects.map((project, i) => <Project key={i} project={project} start={(task) => start(task)} />)}
+      </div>
+      
       <AddProjectModal isOpen={addProjectModalIsShown} onClose={() => setAddProjectModalIsShown(false)} />
     </div>
   )

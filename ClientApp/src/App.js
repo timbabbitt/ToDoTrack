@@ -43,7 +43,7 @@ const App = () => {
   }, [])
 
   return (
-    <div style={{ padding: '10px'}}>
+    <div style={{ padding: '10px' }}>
       <Routes>
         <Route exact path="/" element={<Home projects={projects} user={user} currentTask={currentTask} setCurrentTask={(task) => setCurrentTask(task)} />} />
         <Route exact path="/status" element={<Status projects={projects} user={user} />} />
