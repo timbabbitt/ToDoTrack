@@ -1,22 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
-import { Home } from "./Pages/Home"
+import { Boards } from "./Pages/TaskBoard"
 import { Status } from "./Pages/Status"
 import styles from './styles.module.scss'
-import { projectsAtom, currentTaskAtom } from './Atoms'
+import { Nav } from './Layout/Nav'
+import { Display } from './Layout/Display'
+import { projectsAtom, currentTaskAtom, userAtom } from './Atoms'
 import { useAtom } from 'jotai'
 
 const App = () => {
 
-  const [projects, setProjects] = useAtom(projectsAtom)
-  const [currentTask, setCurrentTask] = useAtom(currentTaskAtom)
-
-  const [user, setUser] = useState({
-    FirstName: "Tim",
-    LastName: "Babbitt",
-    UserId: "4367ff6f-c94a-4bb8-88d1-2fcba2570ee8",
-    BadgeNumber: "69876"
-  })
+  const [, setProjects] = useAtom(projectsAtom)
+  const [, setCurrentTask] = useAtom(currentTaskAtom)
+  const [user] = useAtom(userAtom)
 
   useEffect(() => {
     const fetchURL = "api/Project/Get/" + user.BadgeNumber
@@ -44,10 +40,8 @@ const App = () => {
 
   return (
     <div style={{ padding: '10px' }}>
-      <Routes>
-        <Route exact path="/" element={<Home projects={projects} user={user} currentTask={currentTask} setCurrentTask={(task) => setCurrentTask(task)} />} />
-        <Route exact path="/status" element={<Status projects={projects} user={user} />} />
-      </Routes>
+      <Nav />
+      <Display />
     </div>
   );
 }

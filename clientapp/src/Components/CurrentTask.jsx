@@ -38,29 +38,33 @@ export const CurrentTask = (props) => {
     return returnString
   }
 
+  const onDrop = (e) => {
+    e.preventDefault();
+    console.log(e.dataTransfer.getData('text'))
+  }
+
   return (
-    <motion.div className={styles.currentTaskContainer}
-      animate={{ scale: [0.9, 1.01, 1], opacity: [0, 0.5, 1] }}
+    <motion.div className={styles.currentTask}
+      animate={{ scale: [0.996, 1.001, 1], opacity: [0, 0.9, 1] }}
       transition={{ duration: 0.5 }}
     >
 
 
       <div>
-        <div className={styles.titleText}>{props.task.task?.title}</div>
+        <div className={styles.largeText}>{props.task.task?.title}</div>
         <div className={styles.subTitleText}>{props.task.task.description}</div>
-        <div className={styles.taskNotes}>{props.task.task.notes}</div>
       </div>
+
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        {/* <div>
-          <div className={styles.BodyText}>{format(new Date(props.task.startTime), "M/d/yyyy h:mm:ss aaa")}</div>
-          <div className={styles.BodyText}>{format(timer, "M/d/yyyy h:mm:ss aaa")}</div>
-        </div> */}
-        <div style={{ display: 'flex', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '5px', padding: '2px' }}>
+
+        <div style={{ display: 'flex', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '5px' }}>
           <button className={styles.iconButton} onClick={() => props.stop(props.task)}><FaPlay /></button>
           <button className={styles.iconButton} onClick={() => props.stop(props.task)}><FaPause /></button>
           <button className={styles.iconButton} onClick={() => props.stop(props.task)}><FaStop /></button>
         </div>
-        <div className={styles.SubTitleText}>{durationText(duration)}</div>
+
+        <div className={styles.subTitleText}>{durationText(duration)}</div>
+
       </div>
 
     </motion.div>
