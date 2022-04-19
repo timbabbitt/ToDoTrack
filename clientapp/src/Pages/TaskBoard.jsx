@@ -3,6 +3,7 @@ import { Project } from '../Components/Project';
 import { CurrentTask } from '../Components/CurrentTask';
 import { AddProjectModal } from '../Components/Modals/AddProjectModal';
 import styles from '../styles.module.scss'
+import '../styles.module.scss'
 import { useAtom } from 'jotai';
 import { projectsAtom, currentTaskAtom, userAtom } from '../Atoms';
 import { FaPlus } from 'react-icons/fa';
@@ -59,7 +60,7 @@ export const TaskBoard = (props) => {
 
   return (
     <div>
-      <div className={styles.titleText}>Active Task</div>
+      <div className="titleText">Active Task</div>
       <div className={styles.currentTaskContainer} onDragOver={(e) => e.preventDefault()} onDrop={onDrop}>
         {currentTask !== null && <CurrentTask task={currentTask} stop={(task) => stop(task)} />}
       </div>

@@ -3,6 +3,8 @@ import { Task } from '../Components/Task'
 import { AddTaskModal } from '../Components/Modals/AddTaskModal'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { currentTaskAtom } from '../Atoms';
+import { useAtom } from 'jotai';
 import styles from '../styles.module.scss'
 
 const variants = {
@@ -11,6 +13,8 @@ const variants = {
 }
 
 export const Project = (props) => {
+  const [currentTask] = useAtom(currentTaskAtom)
+
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(true)
 
@@ -52,14 +56,14 @@ export const Project = (props) => {
           <div className={styles.kanbanGroupContainer} onDragOver={(e) => e.preventDefault()} onDrop={(e) => updateTaskStatus(JSON.parse(e.dataTransfer.getData("text")).taskId, 1)}>
               <div className={styles.bodyTextBold}>Backlog</div>
               <div className={styles.kanbanGroup}>
-                {props.project.tasks.filter(task => task.status === 1).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
+                {props.project.tasks.filter(task => task.status === 1 && task.taskId !== currentTask?.taskId).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
               </div>
             </div>
 
             <div className={styles.kanbanGroupContainer} onDragOver={(e) => e.preventDefault()} onDrop={(e) => updateTaskStatus(JSON.parse(e.dataTransfer.getData("text")).taskId, 5)}>
               <div className={styles.bodyTextBold}>Up Next</div>
               <div className={styles.kanbanGroup}>
-              {props.project.tasks.filter(task => task.status === 5).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
+              {props.project.tasks.filter(task => task.status === 5 && task.taskId !== currentTask?.taskId).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
 
               </div>
             </div>
@@ -67,7 +71,7 @@ export const Project = (props) => {
             <div className={styles.kanbanGroupContainer} onDragOver={(e) => e.preventDefault()} onDrop={(e) => updateTaskStatus(JSON.parse(e.dataTransfer.getData("text")).taskId, 10)}>
               <div className={styles.bodyTextBold}>Completed</div>
               <div className={styles.kanbanGroup}>
-              {props.project.tasks.filter(task => task.status === 10).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
+              {props.project.tasks.filter(task => task.status === 10 && task.taskId !== currentTask?.taskId).map((task, i) => <Task key={i} task={task} start={() => props.start(task)} />)}
                 
               </div>
             </div>

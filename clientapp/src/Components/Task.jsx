@@ -14,10 +14,10 @@ export const Task = (props) => {
     e.dataTransfer.setData('text', JSON.stringify(props.task))
   }
 
-  if (currentTask === null) return null
+  //if (currentTask === null) return null
 
   return (
-    <div className={currentTask.taskId === props.task.taskId ? styles.taskContainerActive : styles.taskContainer} draggable onDragStart={onDragStart}>
+    <div className={currentTask?.taskId === props.task.taskId ? styles.taskContainerActive : styles.taskContainer} draggable onDragStart={onDragStart}>
 
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className={styles.largeText}>{props.task.title}</div>
